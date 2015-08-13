@@ -10,18 +10,12 @@
 
 
 
-function getWorksheetData(callback) {
+function getWorksheetData(spreadsheetID, worksheetID) {
     var arr = create2DArray();
 
-    var spreadsheetID = '1Aa0SeYb49zb6neQNJXYp7Rx5ScHhY5PXXtnECr1V3ic';
-    var worksheetID = 'oyqw9mk';
     var url = 'https://spreadsheets.google.com/feeds/cells/' + spreadsheetID + '/' + worksheetID + '/public/values?alt=json';
 
     $.getJSON(url, function (data) {
-//            console.log('entry');
-//            console.log(data.feed.entry);
-//
-//            console.log('end entry');
 
         $.each(data.feed.entry, function (i, val) {
 
@@ -37,17 +31,16 @@ function getWorksheetData(callback) {
                 arr[xCoord - 1] = [];
             }
 
-//                    document.getElementById("hi").innerHTML = content;
             arr[xCoord - 1][yCoord - 1] = content;
 //                    console.log(arr[xCoord - 1][yCoord - 1]);
 
         });
-        // add stuff from here
-//                document.getElementById("hi").innerHTML = "hi";
-        process();
-        callback();
-//                document.write(arr[0][1]);
+               document.write(arr[0][1]);
     });
-//
     return arr
+}
+
+function create2DArray() {
+    var arr = [[]];
+    return arr;
 }
